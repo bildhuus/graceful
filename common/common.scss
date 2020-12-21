@@ -13,8 +13,10 @@
   height: 100vh;
   width: 100vw;
   z-index: -1;
-  background-color: $primary-very-low;
-
+  background-color: var(
+    --gf-primary-very-low-or-primary-low,
+    $primary-very-low
+  );
   @if $no-background-image == "false" {
     background-color: #fff;
     background-image: linear-gradient(-60deg, rgba(255, 255, 255, 0%), #fff 40% 60%, rgba(255, 255, 255, 0%)), repeating-linear-gradient(210deg, transparent 0, #ddd 1px, transparent 2px 24px), repeating-linear-gradient(150deg, transparent 0, #ddd 1px, transparent 2px 24px), repeating-linear-gradient( 90deg, transparent 0, #ddd 1px, transparent 2px 24px);
@@ -30,12 +32,9 @@ tbody {
   border-width: 1px;
 }
 
-#main {
-  padding-top: 120px;
-  padding-bottom: 120px;
-}
-
 #main-outlet {
+  margin-top: 30px;
+  margin-bottom: 50px;
   background: rgba($secondary, 0.95);
   border-radius: 8px;
   width: 75%;
@@ -59,8 +58,8 @@ tbody {
 
 .btn,
 .select-kit.dropdown-select-box .dropdown-select-box-header {
-  border: 1px solid $primary-low;
-  color: $primary-high;
+  border: 1px solid var(--gf-primary-low-or-low-mid, $primary-low);
+  color: var(--primary-high, $primary-high);
   background: transparent;
   border-radius: 4px;
 
@@ -68,6 +67,10 @@ tbody {
     background: $tertiary-low;
     color: $tertiary;
   }
+}
+
+.btn.btn-social {
+  color: var(--secondary);
 }
 
 .btn-danger {
@@ -83,6 +86,16 @@ tbody {
   background: $tertiary;
   color: $secondary;
   border-color: $tertiary;
+}
+
+.btn-flat.close {
+  border: none;
+}
+
+.popup-menu-btn,
+.popup-menu-btn-danger,
+.modal-close {
+  border: none;
 }
 
 #reply-control {
@@ -103,9 +116,10 @@ tbody {
 }
 
 .open .grippie {
-  background: transparent;
+  border-radius: 10px 10px 0 0;
+  opacity: 0.4;
   &:before {
-    border-color: $primary-low;
+    border-color: var(--gf-primary-low-or-low-mid, $primary-low);
   }
 }
 
@@ -124,7 +138,6 @@ tbody {
 }
 
 header.d-header {
-  position: fixed;
   @include box-shadow;
   .contents {
     display: flex;
@@ -133,6 +146,9 @@ header.d-header {
   .panel {
     margin-left: auto;
     order: 5;
+    .rtl & {
+      margin-left: 0;
+    }
   }
 }
 
@@ -151,7 +167,7 @@ header.d-header {
 }
 
 .deleted .topic-body {
-  background-color: rgba($danger, 0.2);
+  background-color: var(--danger-hover, $danger-hover);
 }
 
 // Main category nav
@@ -257,6 +273,12 @@ header.d-header {
 
 // admin
 
+.post-admin-menu {
+  .popup-menu-button {
+    border: none;
+  }
+}
+
 .admin-controls {
   background: $tertiary-low;
   .controls {
@@ -279,6 +301,10 @@ header.d-header {
       );
     }
   }
+}
+
+.boxed.white {
+  background-color: transparent !important;
 }
 
 .nav-stacked {
@@ -331,6 +357,11 @@ span.user-title {
   &.is-highlighted {
     background: $tertiary;
   }
+}
+
+.user-main .staff-counters > div,
+.user-main .staff-counters > div a {
+  color: var(--primary);
 }
 
 // Plugins
